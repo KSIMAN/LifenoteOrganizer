@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NoteForm</class>
- <widget class="QWidget" name="NoteForm">
+ <class>ToDoForm</class>
+ <widget class="QWidget" name="ToDoForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>467</height>
+    <width>717</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,15 +19,25 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="Notes_label">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Заметки</string>
+      <string>Список дел</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
+   <item row="0" column="1">
+    <widget class="QDateEdit" name="dateEdit">
+     <property name="displayFormat">
+      <string>dd/MM/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
     <widget class="QScrollArea" name="scrollArea">
      <property name="widgetResizable">
       <bool>true</bool>
@@ -37,15 +47,15 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>584</width>
-        <height>395</height>
+        <width>628</width>
+        <height>464</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <layout class="QVBoxLayout" name="notes_Lay"/>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <layout class="QVBoxLayout" name="doingsLay"/>
        </item>
-       <item>
+       <item row="1" column="0">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -53,20 +63,13 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>435</height>
           </size>
          </property>
         </spacer>
        </item>
       </layout>
      </widget>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QPushButton" name="add_butt">
-     <property name="text">
-      <string>+</string>
-     </property>
     </widget>
    </item>
   </layout>

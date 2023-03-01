@@ -1,5 +1,4 @@
 #include "noteclass.h"
-#include <QApplication>
 #include "noteeditor.h"
 NoteClass::NoteClass(QString ntpath, QWidget * parent)
 {
@@ -24,7 +23,7 @@ NoteClass::NoteClass(QString ntpath, QWidget * parent)
 
 void NoteClass::ButtonPressed()
 {
-    NoteEditor * editor = new NoteEditor(nullptr, &info);
+    NoteEditor * editor = new NoteEditor(nullptr, &info, button);
     editor->setVisible(true);
 }
 

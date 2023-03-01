@@ -1,10 +1,11 @@
 #include "noteeditor.h"
 #include "ui_noteeditor.h"
 
-NoteEditor::NoteEditor(QWidget *parent, QFileInfo * fileinfo) :
+NoteEditor::NoteEditor(QWidget *parent, QFileInfo * fileinfo, QPushButton * bt_ptr) :
     QWidget(parent),
     ui(new Ui::NoteEditor),
-    file_info(fileinfo)
+    file_info(fileinfo),
+    butt_ptr(bt_ptr)
 {
     ui->setupUi(this);
     file.setFileName(file_info->filePath());
@@ -46,7 +47,12 @@ void NoteEditor::saveText()
     file.close();
 
     if(name_edited)
-        file.rename(file_info->path() + "/" + ui->nameedit->text());
+    {
+        QString newname = ui->nameedit->text() ;
+        file.rename(file_info->path() + "/" + newname);
+        butt_ptr->setText(newname);
+    }
+
 
 }
 
