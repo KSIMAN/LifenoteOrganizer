@@ -4,7 +4,9 @@
 #include <QWidget>
 #include <tdlitem.h>
 #include <QJsonDocument>
+#include <QList>
 #include <QFile>
+#include <QTextStream>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QVBoxLayout>
@@ -18,20 +20,33 @@ public:
     ToDoDay(QDate d);
     ~ToDoDay();
     QDate date;
+    QString getDateInString();
     bool edited;
-    QList<TDLitem*> doings;
+    QList<DoingItem*> doings;
 
 };
 class ToDoController
 {
 public:
     ToDoController();
-  //  ~ToDoController();
+   ~ToDoController();
     QString json_path = "storage/doings/doings.json";
     void LoadDay(ToDoDay * day,QVBoxLayout* owner);
-    void SaveDay(ToDoDay * day);
+
+    void ReadDaysInfo();
+    void WriteDaysInfo();
+    bool RemoveOldData(QList<DoingItem*> * list, int max); //check and remove old days info
+    int max_days;
+
+    QList<ToDoDay*> days;
+    QJsonObject SerializeDay(ToDoDay * day);
+    QJsonArray ConvertDoingsToJson(ToDoDay * day);
+    void ClearLayout(QVBoxLayout* owner);
     ToDoDay *ConvertObjectToDay(QJsonObject obj);
+    void AddDoing();
     ToDoDay* FindDay(QDate date);
+private:
+    //ToDoDay *active_day_ptr;
     QJsonParseError err;
 };
 
@@ -44,12 +59,10 @@ public:
     ~ToDoForm();
 
 private slots:
-    void on_dateEdit_dateChanged(const QDate &date);
-
-
-    void on_dateEdit_editingFinished();
 
     void on_dateEdit_userDateChanged(const QDate &date);
+
+    void on_saveButtton_clicked();
 
 private:
     Ui::ToDoForm *ui;
@@ -57,8 +70,7 @@ private:
     QJsonDocument items_doc;
     ToDoDay * active_day;
     ToDoController controller;
-    void AnalyzeJson();
-    void addTask();
+
 };
 
 
