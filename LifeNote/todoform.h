@@ -56,6 +56,8 @@ class ToDoForm : public QWidget
 
 public:
     explicit ToDoForm(QWidget *parent = nullptr);
+    void AddNewDoing(); // add Empty doing to active_day
+    void SetDeleteModeEnable();
     ~ToDoForm();
 
 private slots:
@@ -63,6 +65,8 @@ private slots:
     void on_dateEdit_userDateChanged(const QDate &date);
 
     void on_saveButtton_clicked();
+
+    void on_addDoing_Butt_clicked();
 
 private:
     Ui::ToDoForm *ui;

@@ -16,7 +16,7 @@ NoteClass::NoteClass(QString ntpath, QWidget * parent)
            QByteArray * histogramByteArray =  new QByteArray(note.readAll());
            notetext = *histogramByteArray;
            delete histogramByteArray;
-           button->setText(notename + '\n' + notetext);
+           button->setText(notename);
         }
     note.close();
 }

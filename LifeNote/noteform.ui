@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>467</height>
+    <width>915</width>
+    <height>664</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -37,13 +37,29 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>584</width>
-        <height>395</height>
+        <width>895</width>
+        <height>592</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QVBoxLayout" name="notes_Lay"/>
+        <layout class="QVBoxLayout" name="notes_Lay">
+         <property name="spacing">
+          <number>15</number>
+         </property>
+         <property name="leftMargin">
+          <number>10</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+        </layout>
        </item>
        <item>
         <spacer name="verticalSpacer">

@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     createDirs();
     initForms();
     activeform = static_cast<QWidget*>(n_form);
-    activeform->show();
+    //activeform->show();
 }
 MainWindow::~MainWindow()
 {
@@ -28,9 +28,11 @@ void MainWindow::createDirs()
 void MainWindow::initForms()
 {
     n_form  = new NoteForm(ui->FormShowW);
-    n_form->hide();
+    n_form->show();
     td_form = new ToDoForm(ui->FormShowW);
     td_form->hide();
+    d_form = new DiaryForm(ui->FormShowW);
+    d_form->hide();
 }
 void MainWindow::changeActive(QWidget *active)
 {
@@ -45,5 +47,11 @@ void MainWindow::on_notes_Button_clicked()
 void MainWindow::on_doings_butt_clicked()
 {
    changeActive(static_cast<QWidget*>(td_form));
+}
+
+
+void MainWindow::on_diary_butt_clicked()
+{
+   changeActive(static_cast<QWidget*>(d_form));
 }
 

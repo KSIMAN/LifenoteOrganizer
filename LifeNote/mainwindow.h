@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <noteform.h>
 #include <todoform.h>
+#include <diaryform.h>
 #include "includes.h"
 
 QT_BEGIN_NAMESPACE
@@ -19,12 +20,14 @@ public:
     ~MainWindow();
     NoteForm * n_form ;
     ToDoForm * td_form;
+    DiaryForm * d_form;
     QWidget * activeform;
 private slots:
     void on_notes_Button_clicked();
 
-
     void on_doings_butt_clicked();
+
+    void on_diary_butt_clicked();
 
 private:
     void createDirs();

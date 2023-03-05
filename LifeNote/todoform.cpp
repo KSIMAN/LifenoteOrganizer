@@ -1,5 +1,9 @@
 #include "todoform.h"
 #include "ui_todoform.h"
+#include <QDebug>
+
+/* ToDoController class*/
+
 ToDoController::ToDoController()
 {
     max_days = 30;
@@ -9,40 +13,6 @@ ToDoController::~ToDoController()
 {
     days.clear();
 }
-ToDoForm::ToDoForm(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::ToDoForm)
-{
-    ui->setupUi(this);
-    ui->dateEdit->setDate(QDate::currentDate());
-    controller.ReadDaysInfo();
-    active_day = controller.FindDay(ui->dateEdit->date());
-    controller.LoadDay(active_day, ui->doingsLay);
-}
-
-ToDoForm::~ToDoForm()
-{
-    delete ui;
-}
-
-
-ToDoDay::ToDoDay(QDate d)
-{
-    date = d;
-    edited = false;
-
-}
-
-ToDoDay::~ToDoDay()
-{
-    doings.clear();
-}
-
-QString ToDoDay::getDateInString()
-{
-    return date.toString("dd/MM/yyyy");
-}
-
 void ToDoController::LoadDay(ToDoDay * day, QVBoxLayout* owner)
 {
     ClearLayout(owner);
@@ -138,11 +108,11 @@ ToDoDay *ToDoController::ConvertObjectToDay(QJsonObject obj)
 {
     QDate date =  QDate::fromString(obj["date"].toString(),"dd/MM/yyyy");
     ToDoDay * day = new ToDoDay(date);
-    QJsonArray daysjs = obj["items"].toArray();
-    for(int i = 0; i< daysjs.size(); i++)
+    QJsonArray doingsjs = obj["items"].toArray();
+    for(int i = 0; i< doingsjs.size(); i++)
     {
-        QString name = daysjs.at(i)["name"].toString();
-        DoingItem * item = new DoingItem(name, daysjs.at(i)["state"].toBool());
+        QString name = doingsjs.at(i)["name"].toString();
+        DoingItem * item = new DoingItem(name, doingsjs.at(i)["state"].toBool());
         day->doings.push_back(item);
     }
     return day;
@@ -162,6 +132,49 @@ ToDoDay* ToDoController::FindDay(QDate date)
     return new_day;
 }
 
+/*ToDoDay class*/
+
+ToDoDay::ToDoDay(QDate d)
+{
+    date = d;
+    edited = false;
+}
+
+ToDoDay::~ToDoDay()
+{
+    doings.clear();
+}
+
+QString ToDoDay::getDateInString()
+{
+    return date.toString("dd/MM/yyyy");
+}
+
+/* ToDoForm class*/
+
+ToDoForm::ToDoForm(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::ToDoForm)
+{
+    ui->setupUi(this);
+    controller.ReadDaysInfo();
+    ui->dateEdit->setDate(QDate::currentDate());
+    active_day = controller.FindDay(ui->dateEdit->date());
+    controller.LoadDay(active_day, ui->doingsLay);
+}
+
+void ToDoForm::AddNewDoing()
+{
+    DoingItem * empty_item = new DoingItem("", false);
+    active_day->doings.push_back(empty_item);
+    ui->doingsLay->addWidget(new TDLitem(&empty_item->item_name, &empty_item->done ));
+}
+
+ToDoForm::~ToDoForm()
+{
+    delete ui;
+}
+
 
 void ToDoForm::on_dateEdit_userDateChanged(const QDate &date)
 {
@@ -172,5 +185,11 @@ void ToDoForm::on_dateEdit_userDateChanged(const QDate &date)
 void ToDoForm::on_saveButtton_clicked()
 {
     controller.WriteDaysInfo();
+}
+
+
+void ToDoForm::on_addDoing_Butt_clicked()
+{
+    AddNewDoing();
 }
 

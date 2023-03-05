@@ -9,6 +9,9 @@ QMAKE_CXXFLAGS_RELEASE+=-O0
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    diarycontroller.cpp \
+    diaryform.cpp \
+    guithemes.cpp \
     main.cpp \
     mainwindow.cpp \
     noteclass.cpp \
@@ -18,6 +21,9 @@ SOURCES += \
     todoform.cpp
 
 HEADERS += \
+    diarycontroller.h \
+    diaryform.h \
+    guithemes.h \
     includes.h \
     mainwindow.h \
     noteclass.h \
@@ -27,6 +33,7 @@ HEADERS += \
     todoform.h
 
 FORMS += \
+    diaryform.ui \
     mainwindow.ui \
     noteeditor.ui \
     noteform.ui \
@@ -37,3 +44,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
